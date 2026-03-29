@@ -8,8 +8,18 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const socket = io();
+  const socket = io({
+    reconnection: true,
+    reconnectionAttempts: Infinity,
+    reconnectionDelay: 1000,
+    reconnectionDelayMax: 5000,
+  });
   let myIndex = null;
+
+  // Keep-alive: ping server every 4 minutes to prevent Render free tier sleep
+  setInterval(() => {
+    fetch("/api/ping").catch(() => {});
+  }, 4 * 60 * 1000);
   let myCard = [];
   let myMarked = new Set();
   let opponentMarked = new Set();

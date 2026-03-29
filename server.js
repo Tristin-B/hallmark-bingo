@@ -6,7 +6,10 @@ const gameManager = require("./game/GameManager");
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  pingInterval: 10000,  // ping every 10s
+  pingTimeout: 30000,   // wait 30s for pong before disconnect
+});
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
@@ -23,6 +26,11 @@ app.get("/api/games/:code", (req, res) => {
   if (!game) return res.status(404).json({ error: "Game not found" });
   if (game.playerCount >= 2) return res.status(400).json({ error: "Game is full" });
   res.json({ code: game.code, players: game.playerCount });
+});
+
+// Keep-alive endpoint to prevent Render free tier from sleeping
+app.get("/api/ping", (req, res) => {
+  res.json({ ok: true });
 });
 
 // --- Socket.IO ---
