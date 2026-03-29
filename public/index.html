@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hallmark Movie Bingo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="landing">
+  <div class="snow-container" id="snow"></div>
+
+  <div class="landing-wrapper">
+    <div class="landing-card">
+      <h1 class="logo">Hallmark Movie<br>Bingo</h1>
+      <p class="tagline">Grab some cocoa, cozy up, and play along!</p>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="create">Create Game</button>
+        <button class="tab" data-tab="join">Join Game</button>
+      </div>
+
+      <form id="create-form" class="tab-content active">
+        <label for="create-name">Your Name</label>
+        <input type="text" id="create-name" placeholder="e.g. Sarah" maxlength="20" required autocomplete="off">
+        <button type="submit" class="btn">Create Game</button>
+      </form>
+
+      <form id="join-form" class="tab-content">
+        <label for="join-name">Your Name</label>
+        <input type="text" id="join-name" placeholder="e.g. Mike" maxlength="20" required autocomplete="off">
+        <label for="join-code">Game Code</label>
+        <input type="text" id="join-code" placeholder="e.g. XKWP" maxlength="4" required autocomplete="off" style="text-transform:uppercase">
+        <button type="submit" class="btn">Join Game</button>
+      </form>
+
+      <p id="error-msg" class="error hidden"></p>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

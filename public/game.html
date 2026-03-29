@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hallmark Bingo - Game</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="game-page">
+  <div class="snow-container" id="snow"></div>
+
+  <!-- Header -->
+  <header class="game-header">
+    <div class="header-left">
+      <h1 class="header-logo">Hallmark Bingo</h1>
+      <div class="game-code-display">
+        Code: <span id="game-code"></span>
+        <button id="copy-code" class="copy-btn" title="Copy code">Copy</button>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="score-board">
+        <div class="score you-score">
+          <span id="your-name">You</span>
+          <span class="score-num" id="your-score">0</span>
+        </div>
+        <div class="score-divider">vs</div>
+        <div class="score opponent-score">
+          <span id="opponent-name">Waiting...</span>
+          <span class="score-num" id="opponent-score">0</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Waiting overlay -->
+  <div id="waiting-overlay" class="overlay">
+    <div class="overlay-card">
+      <h2>Waiting for your partner...</h2>
+      <p>Share this code:</p>
+      <div class="big-code" id="waiting-code"></div>
+      <button id="waiting-copy" class="btn">Copy Code</button>
+    </div>
+  </div>
+
+  <!-- Main game area -->
+  <main class="game-area">
+    <section class="card-section your-card-section">
+      <h2 class="card-title">Your Card</h2>
+      <div class="bingo-card" id="your-card"></div>
+    </section>
+
+    <section class="card-section opponent-card-section">
+      <h2 class="card-title" id="opponent-card-title">Partner's Card</h2>
+      <div class="bingo-card opponent" id="opponent-card"></div>
+      <div class="disconnected-banner hidden" id="disconnected-banner">Partner disconnected...</div>
+    </section>
+  </main>
+
+  <!-- Bingo celebration overlay -->
+  <div id="bingo-overlay" class="overlay hidden">
+    <div class="confetti-container" id="confetti"></div>
+    <div class="overlay-card bingo-card-overlay">
+      <h2 id="bingo-title" class="bingo-title">BINGO!</h2>
+      <p id="bingo-message"></p>
+      <div class="challenge-card" id="challenge-card">
+        <p class="challenge-label">Challenge:</p>
+        <p class="challenge-text" id="challenge-text"></p>
+        <p class="challenge-for" id="challenge-for"></p>
+      </div>
+      <button id="play-again" class="btn">Play Again</button>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,625 @@
+/* === Base Reset & Variables === */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --red-deep: #8B1A1A;
+  --red-dark: #2D1B1B;
+  --cranberry: #C41E3A;
+  --gold: #D4AF37;
+  --cream: #FFF8F0;
+  --green: #2E8B57;
+  --brown: #2D1B1B;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--brown);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* === Snow === */
+.snow-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  background: white;
+  border-radius: 50%;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10px) translateX(0);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% {
+    transform: translateY(100vh) translateX(30px);
+    opacity: 0;
+  }
+}
+
+/* === Landing Page === */
+.landing {
+  background: linear-gradient(135deg, var(--red-deep) 0%, var(--red-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.landing-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+}
+
+.landing-card {
+  background: var(--cream);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: var(--cranberry);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 1.8rem;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--cranberry);
+}
+
+.tab {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--cranberry);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab.active {
+  background: var(--cranberry);
+  color: white;
+}
+
+/* Forms */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: left;
+  color: #555;
+}
+
+input[type="text"] {
+  padding: 0.75rem 1rem;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus {
+  border-color: var(--cranberry);
+}
+
+.btn {
+  padding: 0.8rem 1.5rem;
+  background: var(--cranberry);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 0.5rem;
+}
+
+.btn:hover {
+  background: #a01830;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.error {
+  color: var(--cranberry);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* === Game Page === */
+.game-page {
+  background: linear-gradient(135deg, var(--red-deep) 0%, var(--red-dark) 100%);
+  min-height: 100vh;
+  padding-bottom: 2rem;
+}
+
+/* Header */
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.2rem;
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.header-logo {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--gold);
+}
+
+.game-code-display {
+  font-size: 0.85rem;
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.game-code-display span {
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+
+.copy-btn {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: var(--cream);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+.copy-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* Score Board */
+.score-board {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.score span:first-child {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.7);
+  font-weight: 500;
+}
+
+.score-num {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.score-divider {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Game Area */
+.game-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  padding: 1.2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.card-section {
+  position: relative;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--cream);
+  margin-bottom: 0.6rem;
+  text-align: center;
+}
+
+/* Bingo Card Grid */
+.bingo-card {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 3px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 12px;
+  padding: 3px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+
+.bingo-cell {
+  background: var(--cream);
+  border: none;
+  padding: 0.5rem 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  aspect-ratio: 1;
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-body);
+}
+
+.bingo-cell:first-child { border-radius: 9px 0 0 0; }
+.bingo-cell:nth-child(5) { border-radius: 0 9px 0 0; }
+.bingo-cell:nth-child(21) { border-radius: 0 0 0 9px; }
+.bingo-cell:nth-child(25) { border-radius: 0 0 9px 0; }
+
+.cell-text {
+  font-size: 0.6rem;
+  line-height: 1.3;
+  color: var(--brown);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.bingo-cell:hover:not(.marked):not(.free-space) {
+  background: #f0e6d8;
+  transform: scale(1.03);
+}
+
+.bingo-cell:active:not(.marked):not(.free-space) {
+  transform: scale(0.97);
+}
+
+/* Marked state */
+.bingo-cell.marked {
+  background: var(--cranberry);
+}
+
+.bingo-cell.marked .cell-text {
+  color: white;
+}
+
+.bingo-cell.marked::after {
+  content: '✓';
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.6);
+}
+
+/* Free space */
+.bingo-cell.free-space {
+  background: var(--green);
+  cursor: default;
+}
+
+.bingo-cell.free-space .cell-text {
+  color: white;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.bingo-cell.free-space::before {
+  content: '♥';
+  position: absolute;
+  top: 3px;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.5);
+}
+
+/* Winning line highlight */
+.bingo-cell.winning {
+  background: var(--gold) !important;
+  animation: pulse-gold 0.6s ease infinite alternate;
+}
+
+.bingo-cell.winning .cell-text {
+  color: var(--brown) !important;
+}
+
+@keyframes pulse-gold {
+  from { box-shadow: 0 0 5px var(--gold); }
+  to { box-shadow: 0 0 20px var(--gold), 0 0 40px rgba(212,175,55,0.3); }
+}
+
+/* Opponent card styling */
+.bingo-card.opponent .bingo-cell {
+  cursor: default;
+  opacity: 0.9;
+}
+
+.bingo-card.opponent .bingo-cell:hover {
+  transform: none;
+  background: var(--cream);
+}
+
+.bingo-card.opponent .bingo-cell.marked:hover {
+  background: var(--cranberry);
+}
+
+/* Disconnected banner */
+.disconnected-banner {
+  text-align: center;
+  color: var(--gold);
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  padding: 0.3rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: 6px;
+}
+
+/* === Overlays === */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  padding: 1rem;
+  backdrop-filter: blur(4px);
+}
+
+.overlay-card {
+  background: var(--cream);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+.overlay-card h2 {
+  font-family: var(--font-display);
+  color: var(--cranberry);
+  margin-bottom: 1rem;
+}
+
+.big-code {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 8px;
+  color: var(--cranberry);
+  margin: 1rem 0;
+  font-family: var(--font-body);
+}
+
+/* Bingo Overlay */
+.bingo-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  color: var(--cranberry);
+  animation: bingo-pop 0.5s ease;
+}
+
+@keyframes bingo-pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  70% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.bingo-card-overlay p {
+  margin-bottom: 0.8rem;
+  color: #555;
+}
+
+.challenge-card {
+  background: linear-gradient(135deg, var(--cranberry), #a01830);
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin: 1.2rem 0;
+  color: white;
+}
+
+.challenge-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.8;
+  margin-bottom: 0.5rem !important;
+}
+
+.challenge-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.challenge-for {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-top: 0.5rem !important;
+  font-style: italic;
+}
+
+/* Confetti */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 600;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  border-radius: 2px;
+  animation: confetti-fall linear forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 768px) {
+  .game-area {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0.8rem;
+  }
+
+  .game-header {
+    padding: 0.6rem 0.8rem;
+  }
+
+  .header-logo {
+    font-size: 1rem;
+  }
+
+  .cell-text {
+    font-size: 0.5rem;
+    -webkit-line-clamp: 3;
+  }
+
+  .bingo-cell {
+    padding: 0.3rem 0.15rem;
+  }
+
+  .opponent-card-section {
+    order: 2;
+  }
+
+  .opponent-card-section .bingo-card {
+    max-height: none;
+  }
+
+  .score-num {
+    font-size: 1.1rem;
+  }
+
+  .logo {
+    font-size: 1.8rem;
+  }
+
+  .landing-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .bingo-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .cell-text {
+    font-size: 0.45rem;
+    -webkit-line-clamp: 3;
+  }
+
+  .game-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
